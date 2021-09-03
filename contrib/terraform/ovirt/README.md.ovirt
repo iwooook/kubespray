@@ -1,6 +1,6 @@
-# Kubernetes on Exoscale with Terraform
+# Kubernetes on oVirt with Terraform
 
-Provision a Kubernetes cluster on [vSphere](https://www.vmware.com/se/products/vsphere.html) using Terraform and Kubespray.
+Provision a Kubernetes cluster on oVirt using Terraform and Kubespray.
 
 ## Overview
 
@@ -29,13 +29,9 @@ The setup looks like following.
 +-----------------------+
 ```
 
-## Warning
-
-This setup assumes that the DHCP is disabled in the vSphere cluster and IP addresses have to be provided in the configuration file.
-
 ## Requirements
 
-* Terraform 0.13.0 or newer
+* Terraform 0.13.0 or newer with terraform-provider-ovirt(https://github.com/oVirt/terraform-provider-ovirt) installed
 
 *0.12 also works if you modify the provider block to include version and remove all `versions.tf` files*
 
@@ -46,24 +42,17 @@ NOTE: *Assumes you are at the root of the kubespray repo*
 Copy the sample inventory for your cluster and copy the default terraform variables.
 
 ```bash
-CLUSTER=my-vsphere-cluster
+CLUSTER=my-ovirt-cluster
 cp -r inventory/sample inventory/$CLUSTER
-cp contrib/terraform/vsphere/default.tfvars inventory/$CLUSTER/
+cp contrib/terraform/ovirt/default.tfvars inventory/$CLUSTER/
 cd inventory/$CLUSTER
 ```
 
-Edit `default.tfvars` to match your setup. You MUST set values specific for you network and vSphere cluster.
+Edit `default.tfvars` to match your setup. You MUST set values specific for you network and oVirt cluster.
 
 ```bash
 # Ensure $EDITOR points to your favorite editor, e.g., vim, emacs, VS Code, etc.
 $EDITOR default.tfvars
-```
-
-For authentication in your vSphere cluster you can use the environment variables.
-
-```bash
-export TF_VAR_vsphere_user=username
-export TF_VAR_vsphere_password=password
 ```
 
 Run Terraform to create the infrastructure.
@@ -91,6 +80,7 @@ ansible-playbook -i inventory.ini ../../cluster.yml -b -v
 
 ## Variables
 
+#FIXME
 ### Required
 
 * `machines`: Machines to provision. Key of this object will be used as the name of the machine
@@ -98,12 +88,12 @@ ansible-playbook -i inventory.ini ../../cluster.yml -b -v
   * `ip`: The IP address with the netmask (CIDR notation)
 * `gateway`: The IP address of the network gateway
 * `ssh_public_keys`: List of public SSH keys to install on all machines
-* `vsphere_datacenter`: The identifier of vSphere data center
-* `vsphere_compute_cluster`: The identifier of vSphere compute cluster
-* `vsphere_datastore`: The identifier of vSphere data store
-* `vsphere_server`: The address of vSphere server
-* `vsphere_hostname`: The IP address of vSphere hostname
-* `template_name`: The name of a base image (the image has to be uploaded to vSphere beforehand)
+* `ovirt_datacenter`: The identifier of oVirt data center
+* `ovirt_compute_cluster`: The identifier of oVirt compute cluster
+* `ovirt_datastore`: The identifier of oVirt data store
+* `ovirt_server`: The address of oVirt server
+* `ovirt_hostname`: The IP address of oVirt hostname
+* `template_name`: The name of a base image (the image has to be uploaded to oVirt beforehand)
 
 ### Optional
 

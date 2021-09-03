@@ -56,7 +56,7 @@ module "kubernetes" {
   ## Global ##
 	authorized_ssh_key = var.authorized_ssh_key
 
-  gateway       = var.gateway
+  gateways       = var.gateways
   dns_primary   = var.dns_primary
   dns_secondary = var.dns_secondary
 

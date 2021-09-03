@@ -16,25 +16,16 @@ variable "inventory_file" {
   default = "inventory.ini"
 }
 
-# provider
-variable "ovirt_username" {
-	default = "admin@internal"
-}
-
-variable "ovirt_password" {
-	default = "tmax@23"
-}
-
-variable "ovirt_url" {
-	default = "https://tim3-engine.tmax.dom/ovirt-engine/api"
-}
-
-variable "ovirt_cafile" {
-	default = "/home/jungwook/ca/ca.pem"
-}
-
-
 # default.tfvars
+# provider
+variable "ovirt_username" {}
+
+variable "ovirt_password" {}
+
+variable "ovirt_url" {}
+
+variable "ovirt_cafile" {}
+
 variable "ovirt_datacenters" {}
 
 variable "ovirt_clusters" {}
@@ -49,7 +40,7 @@ variable "template_name" {}
 
 variable "ansible_user" {}
 
-variable "gateway" {}
+variable "gateways" {}
 
 variable "authorized_ssh_key" {}
 

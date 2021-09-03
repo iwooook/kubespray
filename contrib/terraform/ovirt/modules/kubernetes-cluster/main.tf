@@ -21,7 +21,7 @@ resource "ovirt_vm" "worker" {
       label      = "enp1s0"
       boot_proto = "static"
       address    = each.value.ips[0]
-      gateway    = var.gateway
+      gateway    = var.gateways[0]
       netmask    = "255.255.255.0"
     }
 
@@ -31,7 +31,7 @@ resource "ovirt_vm" "worker" {
       label      = "enp1s1"
       boot_proto = "static"
       address    = each.value.ips[1]
-      gateway    = var.gateway
+      gateway    = var.gateways[1]
       netmask    = "255.255.255.0"
     }
   }
@@ -58,7 +58,7 @@ resource "ovirt_vm" "master" {
       label      = "enp1s0"
       boot_proto = "static"
       address    = each.value.ips[0]
-      gateway    = var.gateway
+      gateway    = var.gateways[0]
       netmask    = "255.255.255.0"
     }
   }

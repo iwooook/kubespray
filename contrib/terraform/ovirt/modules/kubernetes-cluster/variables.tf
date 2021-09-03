@@ -9,7 +9,7 @@ variable "machines" {
   }))
 }
 
-variable "gateway" {}
+variable "gateways" {}
 variable "dns_primary" {}
 variable "dns_secondary" {}
 variable "template_id" {}
